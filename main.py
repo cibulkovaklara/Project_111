@@ -43,3 +43,41 @@ print("username:", end=" ")
 username = input().strip()
 print("password:", end=" ")
 password = input().strip()
+
+if USERS.get(username) != password:
+    print("unregistered user, terminating the program..")
+    exit()
+
+print("-" * 40)
+print(f"Welcome to the app, {username}")
+print("We have 3 texts to be analyzed.")
+print("-" * 40)
+
+print("Enter a number btw. 1 and 3 to select:", end=" ")
+choice = input().strip()
+
+if not choice.isdigit() or not (1 <= int(choice) <= 3):
+    print("Invalid choice, terminating the program..")
+    exit()
+
+text = TEXTS[int(choice) - 1]
+words = text.split()
+
+num_words = len(words) 
+titlecase_words = sum(1 for word in words if word.istitle())
+uppercase_words = sum(1 for word in words if word.isupper() and word.isalpha())
+lowercase_words = sum(1 for word in words if word.islower())
+numeric_strings = [int(word) for word in words if word.isdigit()] 
+sum_numbers = sum(numeric_strings)
+
+word_lengths = {}
+for word in words:
+    clean_word = word.strip(r"$%&'()*+,-./:;<#=>?@[\]^_`{|}~")
+    length = len(clean_word)
+    if length > 0:
+        word_lengths[length] = word_lengths.get(length, 0) + 1
+
+print("LEN|  OCCURENCES  |NR.")
+print("-" * 40)
+for length in sorted(word_lengths):
+    print(f"{length:>2}| {'*' * word_lengths[length]:<12} |{word_lengths[length]}")
