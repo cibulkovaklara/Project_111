@@ -70,6 +70,15 @@ lowercase_words = sum(1 for word in words if word.islower())
 numeric_strings = [int(word) for word in words if word.isdigit()] 
 sum_numbers = sum(numeric_strings)
 
+print("-" * 40)
+print(f"There are {num_words} words in the selected text.")
+print(f"There are {titlecase_words} titlecase words.")
+print(f"There are {uppercase_words} uppercase words.")
+print(f"There are {lowercase_words} lowercase words.")
+print(f"There are {len(numeric_strings)} numeric strings.")
+print(f"The sum of all the numbers {sum_numbers}")
+print("-" * 40)
+
 word_lengths = {}
 for word in words:
     clean_word = word.strip(r"$%&'()*+,-./:;<#=>?@[\]^_`{|}~")
